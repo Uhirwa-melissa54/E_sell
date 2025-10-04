@@ -218,10 +218,23 @@ public class Main {
                         Profit profit = new ProfitOverYear(dailyProfit1, 365);
                         System.out.println("Expected Yearly Profit: " + profit.calculateProfit());
 
+                    case 7:
+                        double dailyProfit2=seller.getTotalProfit();
+                        Tax taxSystem = new Tax(10000, 0.18); // 10,000 initial capital, 18% tax
+                        double tax = taxSystem.calculateTax(dailyProfit2);
+                        System.out.println("Tax over today's profit: " + tax);
+                        taxSystem.addCapital(dailyProfit2 - tax);
+                        System.out.println("Remaining Capital after adding profit & paying tax: " + taxSystem.getCapital());
+
+                    case 8:
+                        break;
 
 
 
-            }
+
+
+
+                }
         }
 
 
@@ -232,11 +245,6 @@ public class Main {
 
 
             // Inheritance: Capital & Tax
-            Tax taxSystem = new Tax(10000, 0.18); // 10,000 initial capital, 18% tax
-            double tax = taxSystem.calculateTax(dailyProfit);
-            System.out.println("Tax over today's profit: " + tax);
-            taxSystem.addCapital(dailyProfit - tax);
-            System.out.println("Remaining Capital after adding profit & paying tax: " + taxSystem.getCapital());
 
         } else {
             System.out.println("Login failed!");
