@@ -210,19 +210,26 @@ public class Main {
                         break;
                     case 4:
                         seller.viewCredits();
-                    case 5:cd
+                    case 5:
+                        double dailyProfit = seller.getTotalProfit();
+                        System.out.println("Total Profit Today: " + dailyProfit);
+                    case 6:
+                        double dailyProfit1 = seller.getTotalProfit();
+                        Profit profit = new ProfitOverYear(dailyProfit1, 365);
+                        System.out.println("Expected Yearly Profit: " + profit.calculateProfit());
+
+
+
 
             }
         }
 
 
-            // Profit Calculation
-            double dailyProfit = seller.getTotalProfit();
-            System.out.println("Total Profit Today: " + dailyProfit);
 
-            // Polymorphism with Profit
-            Profit profit = new ProfitOverYear(dailyProfit, 365);
-            System.out.println("Expected Yearly Profit: " + profit.calculateProfit());
+
+
+
+
 
             // Inheritance: Capital & Tax
             Tax taxSystem = new Tax(10000, 0.18); // 10,000 initial capital, 18% tax
