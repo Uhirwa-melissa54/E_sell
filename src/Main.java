@@ -27,6 +27,7 @@ class ProfitOverYear extends Profit {
 }
 class Capital {
     protected double initialCapital;
+    public Capital() {}
 
     public Capital(double initialCapital) {
         this.initialCapital = initialCapital;
@@ -45,8 +46,8 @@ class Capital {
 class Tax extends Capital {
     private double taxRate;
 
-    public Tax(double initialCapital, double taxRate) {
-        super(initialCapital);
+    public Tax(double taxRate) {
+
         this.taxRate = taxRate;
     }
 
