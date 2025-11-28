@@ -159,6 +159,20 @@ public class Main {
     private static final String BASE_PATH = "C:\\Users\\HP\\IdeaProjects\\"; // folder for storing user files
 
     public static void main(String[] args) {
+        try {
+            ConnectDB task = new ConnectDB();
+            Thread t = new Thread(task);
+            t.start();
+            t.join();
+            Connection conn = task.getConnection();
+
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
+
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Welcome to Seller Management System");

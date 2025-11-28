@@ -1,3 +1,4 @@
+/*
 package printer;
 
 import java.util.Comparator;
@@ -8,3 +9,4 @@ public class SortEmp implements Comparator<Employee> {
         return Integer.compare(e1.getAge(), e2.getAge());
     }
 }
+*/
