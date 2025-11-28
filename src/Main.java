@@ -59,6 +59,7 @@ class Tax extends Capital {
 
 class Payment {
     public void processPayment(double amount) {
+
         System.out.println("Processing generic payment of " + amount);
     }
 }
@@ -150,23 +151,8 @@ class Product {
     public double getCostPrice() { return costPrice; }
     public double getSellingPrice() { return sellingPrice; }
 }
- class ConnectDB{
-    public Connection connectDB(){
-        String url=System.getenv("db_url");
-        String user=System.getenv("db_user");
-        String password=System.getenv("db_pass");
-        try{
-            Connection conn= DriverManager.getConnection(url,user,password);
-            return conn;
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        }
 
-    }
 
-}
 
 
 public class Main {
@@ -180,7 +166,7 @@ public class Main {
         System.out.println("2. Log In");
         System.out.print("Choose option: ");
         int option = sc.nextInt();
-        sc.nextLine(); // clear buffer
+        sc.nextLine();
 
         Seller seller = null;
 
@@ -237,9 +223,6 @@ public class Main {
             return;
         }
 
-        // ----------------------------
-        // AFTER LOGIN — main menu
-        // ----------------------------
         while (true) {
             System.out.println("\n1. Add product");
             System.out.println("2. Sell product");
@@ -302,7 +285,7 @@ public class Main {
                     break;
 
                 case 7:
-                    Tax taxSystem = new Tax(10000, 0.18);
+                    Tax taxSystem = new Tax( 0.18);
                     double tax = taxSystem.calculateTax(seller.getTotalProfit());
                     System.out.println("Tax on today’s profit: " + tax);
                     taxSystem.addCapital(seller.getTotalProfit() - tax);
