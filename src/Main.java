@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -159,12 +157,13 @@ public class Main {
     private static final String BASE_PATH = "C:\\Users\\HP\\IdeaProjects\\"; // folder for storing user files
 
     public static void main(String[] args) {
+        Connection conn=null;
         try {
             ConnectDB task = new ConnectDB();
             Thread t = new Thread(task);
             t.start();
             t.join();
-            Connection conn = task.getConnection();
+             conn = task.getConnection();
 
         }
         catch (InterruptedException e) {
@@ -185,15 +184,46 @@ public class Main {
         Seller seller = null;
 
         if (option == 1) {
-            // SIGN UP
             System.out.print("Enter ID: ");
-            String id = sc.nextLine();
+             int id = sc.nextInt();
+             sc.nextLine();
             System.out.print("Enter Name: ");
             String name = sc.nextLine();
             System.out.print("Enter Password: ");
             String pass = sc.nextLine();
 
-            // Create account file
+            System.out.print("Enter Email: ");
+            String email = sc.nextLine();
+
+            System.out.print("Enter location: ");
+            String location = sc.nextLine();
+
+            String sql = "INSERT INTO clients ( name, email, location, password,_id) VALUES (?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                pstmt.setString(1, name);
+                pstmt.setString(2, email);
+                pstmt.setString(3, location);
+                pstmt.setString(4, pass);
+                pstmt.setInt(5, id);
+
+
+                int rowsInserted = pstmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Seller registered successfully!");
+                } else {
+                    System.out.println("Failed to register seller.");
+                }
+
+
+                conn.close();
+                sc.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }}}
+       /*
             String filename = BASE_PATH + name + "_" + pass + ".txt";
             File file = new File(filename);
 
@@ -213,9 +243,9 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
-            }
+            }*/
 
-        } else if (option == 2) {
+      /*  } else if (option == 2) {
             // LOGIN
             System.out.print("Enter Name: ");
             String name = sc.nextLine();
@@ -318,3 +348,4 @@ public class Main {
 }
 
 
+*/
